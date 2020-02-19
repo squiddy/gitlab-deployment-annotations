@@ -12,7 +12,8 @@ import (
 var client *gitlab.Client
 
 type Query struct {
-	ProjectID int `json:"project_id"`
+	ProjectID   int    `json:"project_id"`
+	Environment string `json:"environment"`
 }
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 			return nil, fmt.Errorf("Couldn't parse query: %w", err)
 		}
 
-		ds, err := GetFilteredDeployments(client, query.ProjectID, req.Range.From, req.Range.To)
+		ds, err := GetFilteredDeployments(client, query.ProjectID, query.Environment, req.Range.From, req.Range.To)
 		if err != nil {
 			return nil, fmt.Errorf("Failed to get deployments: %w", err)
 		}

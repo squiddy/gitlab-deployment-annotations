@@ -20,11 +20,11 @@ type ListDeployments struct {
 // GetFilteredDeployments returns a list of deployments for the given project in
 // the given time interval.
 func GetFilteredDeployments(client *gitlab.Client, projectID int,
-	from time.Time, to time.Time) ([]*gitlab.Deployment, error) {
+	environment string, from time.Time, to time.Time) ([]*gitlab.Deployment, error) {
 
 	opts := &ListDeployments{
 		Status:        gitlab.String("success"),
-		Environment:   gitlab.String("Live"),
+		Environment:   gitlab.String(environment),
 		UpdatedAfter:  gitlab.String(from.Format(time.RFC3339)),
 		UpdatedBefore: gitlab.String(to.Format(time.RFC3339)),
 

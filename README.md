@@ -25,7 +25,7 @@ Add annotations to a dashboard using your datasource and configure the query
 display, for example:
 
 ```json
-{"project_id": 16}
+{"project_id": 16, "environment": "Live"}
 ```
 
 ## Development
