@@ -50,7 +50,7 @@ func annotations(res http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(res).Encode(&result)
 }
 
-func connectionTest(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "ok")
 }
 
@@ -84,7 +84,7 @@ func withDataSource(next http.Handler, dataSource DataSource) http.Handler {
 // grafana.
 func (ds DataSource) ListenAndServe(addr string) error {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", connectionTest)
+	mux.HandleFunc("/", index)
 	mux.HandleFunc("/annotations", annotations)
 	return http.ListenAndServe(addr, withDataSource(mux, ds))
 }
