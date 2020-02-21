@@ -1,6 +1,7 @@
 # Annotations for grafana from gitlab deployments
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Go](https://github.com/squiddy/gitlab-deployment-annotations/workflows/Go/badge.svg)
 
 Provides a grafana datasource to get annotations for each deployment in
 gitlab. Useful to see whether code you deployed had any impact.
