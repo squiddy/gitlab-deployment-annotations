@@ -9,6 +9,8 @@ jobs:
 
     - name: Set up Go
       uses: actions/setup-go@v1
+      with:
+        version: 1.13
 
     - name: Check out code
       uses: actions/checkout@v2
