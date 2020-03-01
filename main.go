@@ -1,9 +1,11 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/xanzy/go-gitlab"
@@ -17,7 +19,15 @@ type Query struct {
 }
 
 func main() {
-	client = gitlab.NewClient(nil, os.Getenv("GITLAB_TOKEN"))
+	clientHTTP := (*http.Client)(nil)
+	if os.Getenv("HTTPS_SKIP_VERIFY") == "1" {
+		transCfg := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		clientHTTP = &http.Client{Transport: transCfg}
+	}
+
+	client = gitlab.NewClient(clientHTTP, os.Getenv("GITLAB_TOKEN"))
 	client.SetBaseURL(os.Getenv("GITLAB_URL"))
 
 	ds := &DataSource{}
